@@ -40,6 +40,7 @@ public class PacienteService {
                 CitaRepresentation citaRepresentation = new CitaRepresentation();
                 citaRepresentation.setId(cita.getId());
                 citaRepresentation.setFecha(cita.getFecha());
+                citaRepresentation.setHora(cita.getHora());
                 citaRepresentation.setDoctorId(cita.getDoctor().getId().intValue());
                 return citaRepresentation;
             }).toList();
