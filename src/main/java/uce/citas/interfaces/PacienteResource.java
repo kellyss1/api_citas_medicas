@@ -129,7 +129,7 @@ public class PacienteResource {
             return Response.ok().build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Error al eliminar paciente: " + e.getMessage()).build();
+                    .entity("Error al eliminar paciente, debe eliminar las citas primero: " + e.getMessage()).build();
         }
     }
 
