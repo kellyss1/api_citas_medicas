@@ -74,8 +74,24 @@ public class CitaService {
         cita.setId(citaRepresentation.getId());
         cita.setFecha(citaRepresentation.getFecha());
         cita.setHora(citaRepresentation.getHora());
-        cita.setDoctor(this.doctorInterface.findById(citaRepresentation.getDoctorId().longValue()));
-        cita.setPaciente(this.pacienteInterface.findById(citaRepresentation.getPacienteId().longValue()));
+        // Validar doctor
+        if (citaRepresentation.getDoctorId() == null) {
+            throw new IllegalArgumentException("DoctorId es obligatorio para crear una cita.");
+        }
+        var doctor = this.doctorInterface.findById(citaRepresentation.getDoctorId().longValue());
+        if (doctor == null) {
+            throw new IllegalArgumentException("No existe un doctor con el id proporcionado.");
+        }
+        cita.setDoctor(doctor);
+        // Validar paciente
+        if (citaRepresentation.getPacienteId() == null) {
+            throw new IllegalArgumentException("PacienteId es obligatorio para crear una cita.");
+        }
+        var paciente = this.pacienteInterface.findById(citaRepresentation.getPacienteId().longValue());
+        if (paciente == null) {
+            throw new IllegalArgumentException("No existe un paciente con el id proporcionado.");
+        }
+        cita.setPaciente(paciente);
         return cita;
     }
 
